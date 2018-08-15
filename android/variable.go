@@ -117,6 +117,20 @@ type variableProperties struct {
 			Srcs         []string
 		}
 
+		Device_support_hwfde struct {
+			Cflags []string
+			Header_libs  []string
+			Shared_libs  []string
+		}
+
+		Device_support_hwfde_perf struct {
+			Cflags []string
+		}
+
+		Additional_gralloc_10_usage_bits struct {
+			Cppflags []string
+		}
+
 		// include custom variables
 		Aosp android.Product_variables
 	} `android:"arch_variant"`
@@ -238,6 +252,8 @@ type productVariables struct {
 
 	// include Custom variables
 	Aosp android.ProductVariables
+
+	Additional_gralloc_10_usage_bits  *string `json:",omitempty"`
 }
 
 func boolPtr(v bool) *bool {
