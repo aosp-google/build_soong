@@ -43,6 +43,8 @@ func removeGlobs(ctx Context, globs ...string) {
 // itself in case it's a symlink.
 func clean(ctx Context, config Config, what int) {
 	removeGlobs(ctx, filepath.Join(config.OutDir(), "*"))
+	removeGlobs(ctx, filepath.Join(config.OutDir(), "..?*"))
+	removeGlobs(ctx, filepath.Join(config.OutDir(), ".[!.]*"))
 	ctx.Println("Entire build directory removed.")
 }
 
@@ -96,6 +98,7 @@ func installClean(ctx Context, config Config, what int) {
 		hostOut("vts"),
 		productOut("*.img"),
 		productOut("*.zip"),
+                productOut("*.md5"),
 		productOut("android-info.txt"),
 		productOut("kernel"),
 		productOut("data"),
