@@ -27,6 +27,8 @@ import (
 
 	"github.com/google/blueprint/bootstrap"
 	"github.com/google/blueprint/proptools"
+
+	"aosp/soong/android"
 )
 
 var Bool = proptools.Bool
@@ -468,6 +470,14 @@ func (c *config) ResourceOverlays() []string {
 	return *c.productVariables.ResourceOverlays
 }
 
+func (c *config) JavaSourceOverlays() string {
+	return String(c.productVariables.Aosp.Java_Source_Overlays)
+}
+
+func (c *config) JavaSourceOverlayModuleWhitelist() []string {
+	return android.CustomConfig.JavaSourceOverlayModuleWhitelist
+}
+
 func (c *config) PlatformVersionName() string {
 	return String(c.productVariables.Platform_version_name)
 }
@@ -774,6 +784,10 @@ func (c *deviceConfig) BtConfigIncludeDir() string {
 
 func (c *deviceConfig) DeviceKernelHeaderDirs() []string {
 	return c.config.productVariables.DeviceKernelHeaders
+}
+
+func (c *deviceConfig) SpecificCameraParametersLibrary() string {
+	return String(c.config.productVariables.Aosp.Specific_camera_parameter_library)
 }
 
 func (c *deviceConfig) NativeCoverageEnabled() bool {
